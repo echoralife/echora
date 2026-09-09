@@ -36,12 +36,16 @@ test("renders the accumulated structure and growth controls", async () => {
   const html = await renderedPage("structure");
 
   assert.match(html, /current structure/i);
+  assert.match(html, /seven rooms and five later additions/i);
   assert.match(html, /drag to turn the building/i);
+  assert.match(html, /Interactive Echora structure/i);
+  assert.match(html, /unbuilt/i);
   assert.match(html, /things added here/i);
   assert.match(html, /last change/i);
   assert.match(html, /start over/i);
   assert.match(html, /all changes shown/i);
   assert.match(html, /href="\/commits"/i);
+  assert.doesNotMatch(html, /no room.*moves when approached|Interactive Echora survey/i);
 });
 
 test("uses Three.js as the spatial mechanism and keeps the route local", async () => {

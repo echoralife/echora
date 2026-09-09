@@ -92,8 +92,8 @@ export default function EchoraWorld() {
     const mountElement = mount;
 
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0xfdfdfb);
-    scene.fog = new THREE.Fog(0xfdfdfb, 18, 34);
+    scene.background = new THREE.Color(0xffffff);
+    scene.fog = new THREE.Fog(0xffffff, 18, 34);
 
     const camera = new THREE.PerspectiveCamera(36, 1, 0.1, 100);
     camera.position.set(0, 0, 16);
@@ -344,7 +344,7 @@ export default function EchoraWorld() {
   }, []);
 
   return (
-    <section className="survey" aria-label="Interactive Echora survey">
+    <section className="survey" aria-label="Interactive Echora structure">
       <div className="world-frame" id="threshold">
         <div className="world-canvas" ref={mountRef} aria-hidden="true" />
         <div className="room-labels" aria-label="Rooms">
@@ -364,8 +364,8 @@ export default function EchoraWorld() {
             </button>
           ))}
         </div>
-        <p className="center-note" ref={centerLabelRef} aria-hidden="true">no room<br />moves when approached</p>
-        <p className="world-instruction">drag / select a room</p>
+        <p className="center-note" ref={centerLabelRef} aria-hidden="true">unbuilt</p>
+        <p className="world-instruction">drag / select</p>
       </div>
 
       <aside className="room-reading" aria-live="polite">

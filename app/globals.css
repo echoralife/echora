@@ -498,3 +498,46 @@ body { background: #fff; }
   .plan-room path, .plan-connections path, .plan-latest path { animation: none; stroke-dashoffset: 0; }
   .plan-room text { animation: none; opacity: 1; }
 }
+
+/* The structure is presented as a figure in the same document as the front page. */
+.raw-structure-page { width: min(1180px, calc(100% - 32px)); padding-bottom: 32px; }
+.raw-structure-copy { max-width: 760px; padding: 32px 0 25px; }
+.raw-structure-copy > p { margin: 0 0 13px; }
+.raw-structure-copy > p:not(.raw-lede) { font-size: 16px; line-height: 1.48; }
+.raw-structure-key { display: flex; flex-wrap: wrap; gap: 12px 22px; color: #666; font: 12px Consolas, "Courier New", monospace !important; }
+.raw-structure-key span::before { content: "—"; margin-right: 7px; color: #111; }
+.raw-structure-key span:nth-child(2)::before { color: #7d5048; }
+.raw-structure-key span:nth-child(3)::before { content: "- -"; color: #888; }
+.raw-structure-page .survey { min-height: 620px; border: 1px solid #aaa; display: grid; grid-template-columns: minmax(0, 1fr) 292px; }
+.raw-structure-page .world-frame { min-height: 620px; border-right: 1px solid #aaa; background: #fff; }
+.raw-structure-page .room-reading { padding: 18px 16px; background: #fff; }
+.raw-structure-page .room-labels button { min-height: 30px; padding: 5px 8px; border-color: #bbb; background: rgba(255,255,255,.94); color: #555; font-size: 10px; text-transform: lowercase; }
+.raw-structure-page .room-labels button.is-active { border-color: #0000ee; background: #fff; color: #0000ee; }
+.raw-structure-page .center-note { color: #777; font-size: 12px; font-style: normal; }
+.raw-structure-page .world-instruction { color: #666; font-size: 10px; text-transform: lowercase; }
+.raw-structure-page .reading-index span,
+.raw-structure-page .room-features > span,
+.raw-structure-page .path-record > span,
+.raw-structure-page .growth-control > span { font-size: 10px; text-transform: lowercase; }
+.raw-structure-page .reading-index b { color: #0000ee; font-size: 20px; }
+.raw-structure-page .room-reading blockquote { margin: 22px 0; font-size: 19px; }
+.raw-structure-page .room-reading dt { font-size: 10px; text-transform: lowercase; }
+.raw-structure-page .room-reading dd,
+.raw-structure-page .room-features ul,
+.raw-structure-page .room-features p,
+.raw-structure-page .path-record ol { font-size: 12px; }
+.raw-structure-page .growth-control { margin-top: 18px; padding: 12px 0 0; border: 0; border-top: 1px solid #ccc; }
+.raw-structure-page .growth-control button { min-height: 34px; background: #fff; color: #444; font-size: 10px; text-transform: lowercase; }
+.raw-structure-page .return-button { min-height: 34px; padding: 8px 0 3px; border: 0; border-bottom: 1px solid #aaa; color: #444; font-size: 10px; text-align: left; text-transform: lowercase; }
+.raw-structure-page .return-button:hover,
+.raw-structure-page .return-button:focus-visible { border-color: #0000ee; background: transparent; color: #0000ee; }
+.raw-structure-footer { margin-top: 24px; }
+
+@media (max-width: 760px) {
+  .raw-structure-page { width: min(100% - 20px, 1180px); }
+  .raw-structure-copy { padding-top: 27px; }
+  .raw-structure-page .survey { min-height: 0; grid-template-columns: 1fr; }
+  .raw-structure-page .world-frame { min-height: 58svh; border-right: 0; border-bottom: 1px solid #aaa; }
+  .raw-structure-page .room-reading { min-height: 390px; }
+  .raw-structure-page .room-labels button { min-height: 34px; }
+}
