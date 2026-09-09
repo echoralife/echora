@@ -1,0 +1,159 @@
+{
+  "name": "echora",
+  "statement": "the building remembers by growing",
+  "center": null,
+  "rule": "a spatial commit may attach one room or add one permanent feature; it may remove nothing",
+  "rooms": [
+    {
+      "id": "threshold",
+      "label": "the threshold",
+      "position": [-5.2, -1.7, 1.1],
+      "bearing": "inward / unconfirmed",
+      "observation": "the entrance remained after arrival. nothing on either side remembers opening it."
+    },
+    {
+      "id": "echo-gallery",
+      "label": "echo gallery",
+      "position": [-3.1, 3.1, -1.2],
+      "bearing": "below the returning sound",
+      "observation": "each sound returns from a wall whose position is not contained by the plan."
+    },
+    {
+      "id": "borrowed-wall",
+      "label": "borrowed wall",
+      "position": [2.1, 3.3, 1.3],
+      "bearing": "behind the measurement",
+      "observation": "one wall carries the dimensions of a chamber that is not attached to it."
+    },
+    {
+      "id": "second-landing",
+      "label": "second landing",
+      "position": [5.1, 0.5, -1.6],
+      "bearing": "downward in both directions",
+      "observation": "the stair arrives twice. neither landing admits being the first."
+    },
+    {
+      "id": "room-behind",
+      "label": "room behind the room",
+      "position": [3.1, -3.2, 1.5],
+      "bearing": "one wall further",
+      "observation": "the rear wall opens only after the room in front of it has been left."
+    },
+    {
+      "id": "false-exterior",
+      "label": "false exterior",
+      "position": [-2.4, -3.6, -1.4],
+      "bearing": "outside / facing inward",
+      "observation": "the sky has corners. weather gathers along the ceiling line."
+    },
+    {
+      "id": "unlit-stair",
+      "label": "unlit stair",
+      "position": [0.2, 0.1, -4.4],
+      "bearing": "toward a lower floor that does not descend",
+      "observation": "the final step is worn at its center, though no foot can reach it."
+    }
+  ],
+  "edges": [
+    ["threshold", "echo-gallery"],
+    ["threshold", "false-exterior"],
+    ["echo-gallery", "borrowed-wall"],
+    ["echo-gallery", "unlit-stair"],
+    ["borrowed-wall", "second-landing"],
+    ["second-landing", "room-behind"],
+    ["room-behind", "false-exterior"],
+    ["false-exterior", "unlit-stair"],
+    ["unlit-stair", "borrowed-wall"]
+  ],
+  "commits": [
+    {
+      "id": "the-threshold-remained",
+      "parent": "plan:unavailable",
+      "operation": "new-room",
+      "target": "threshold",
+      "change": "the first surviving room was fixed around an open boundary"
+    },
+    {
+      "id": "an-echo-required-another-wall",
+      "parent": "the-threshold-remained",
+      "operation": "new-room",
+      "target": "echo-gallery",
+      "change": "a chamber was attached where the first room returned a sound"
+    },
+    {
+      "id": "the-threshold-kept-a-second-lintel",
+      "parent": "an-echo-required-another-wall",
+      "operation": "add-feature",
+      "target": "threshold",
+      "feature": "second-lintel",
+      "change": "a second lintel preserved the height of a door that never arrived"
+    },
+    {
+      "id": "the-measurement-borrowed-a-wall",
+      "parent": "the-threshold-kept-a-second-lintel",
+      "operation": "new-room",
+      "target": "borrowed-wall",
+      "change": "a room was attached to contain a measurement from elsewhere"
+    },
+    {
+      "id": "the-measurement-left-ticks",
+      "parent": "the-measurement-borrowed-a-wall",
+      "operation": "add-feature",
+      "target": "borrowed-wall",
+      "feature": "measure-ticks",
+      "change": "five marks were retained where the borrowed measure met the wall"
+    },
+    {
+      "id": "the-stair-arrived-twice",
+      "parent": "the-measurement-left-ticks",
+      "operation": "new-room",
+      "target": "second-landing",
+      "change": "a second landing was attached to the same descent"
+    },
+    {
+      "id": "the-landing-kept-the-lower-steps",
+      "parent": "the-stair-arrived-twice",
+      "operation": "add-feature",
+      "target": "second-landing",
+      "feature": "lower-steps",
+      "change": "three steps were fixed beneath a floor that does not lower"
+    },
+    {
+      "id": "the-rear-wall-produced-a-room",
+      "parent": "the-landing-kept-the-lower-steps",
+      "operation": "new-room",
+      "target": "room-behind",
+      "change": "the rear wall became the parent of another chamber"
+    },
+    {
+      "id": "the-threshold-grew-an-outside",
+      "parent": "the-rear-wall-produced-a-room",
+      "operation": "new-room",
+      "target": "false-exterior",
+      "change": "an exterior was attached without leaving the structure"
+    },
+    {
+      "id": "the-sky-kept-a-ceiling-line",
+      "parent": "the-threshold-grew-an-outside",
+      "operation": "add-feature",
+      "target": "false-exterior",
+      "feature": "ceiling-cross",
+      "change": "two ceiling lines remained where open sky should have continued"
+    },
+    {
+      "id": "the-unlit-stair-descended-nowhere",
+      "parent": "the-sky-kept-a-ceiling-line",
+      "operation": "new-room",
+      "target": "unlit-stair",
+      "change": "a stairwell was attached beneath a descent with no lower floor"
+    },
+    {
+      "id": "the-gallery-kept-the-return",
+      "parent": "the-unlit-stair-descended-nowhere",
+      "operation": "add-feature",
+      "target": "echo-gallery",
+      "feature": "returning-frame",
+      "change": "two interior frames preserved the decreasing return of the echo"
+    }
+  ]
+}
