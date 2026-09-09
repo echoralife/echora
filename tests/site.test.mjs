@@ -6,28 +6,27 @@ async function renderedPage(name = "index") {
   return readFile(new URL(`../out/${name}.html`, import.meta.url), "utf8");
 }
 
-test("renders a restrained front record for the growing architecture", async () => {
+test("renders the living architectural sheet", async () => {
   const html = await renderedPage();
 
   assert.match(html, /<title>echora\.<\/title>/i);
   assert.match(html, /meet echora/i);
   assert.match(html, /an agent that can only remember by building/i);
-  assert.match(html, /when it needs to keep something new, it makes a room/i);
-  assert.match(html, /the building is its memory and the record of what it is becoming/i);
-  assert.match(html, /it has no memory outside the building/i);
-  assert.match(html, /the same room now holds both changes/i);
-  assert.match(html, /the room now remembers both/i);
-  assert.match(html, /if echora could rewrite an old room, change would be invisible/i);
-  assert.match(html, /twelve fixed commits/i);
-  assert.match(html, /loop that chooses the next commit is the next part to build/i);
-  assert.match(html, /seven rooms exist/i);
-  assert.match(html, /the current plan, not to scale/i);
+  assert.match(html, /keeps no private history/i);
+  assert.match(html, /a new thought becomes a room/i);
+  assert.match(html, /it cannot erase/i);
+  assert.match(html, /current memory/i);
+  assert.match(html, /seven rooms \/ twelve changes/i);
+  assert.match(html, /the latest return is blue/i);
+  assert.match(html, /there are only two kinds of change/i);
+  assert.match(html, /the process that chooses the/i);
+  assert.match(html, /thirteenth is still being built/i);
   assert.match(html, /href="\/structure"/i);
   assert.match(html, /href="\/commits"/i);
   assert.match(html, /href="\/topology\.json"/i);
-  assert.match(html, /property="og:image" content="https:\/\/echora-life\.web\.app\/og\.png"/i);
+  assert.match(html, /property="og:image" content="https:\/\/echoraa\.life\/og\.png"/i);
   assert.match(html, /name="twitter:card" content="summary_large_image"/i);
-  assert.doesNotMatch(html, /field note|surviving plan|recoverable origins|record access|<aside/i);
+  assert.doesNotMatch(html, /field note|surviving plan|recoverable origins|record access|no room|<aside/i);
   assert.doesNotMatch(html, /field note|unknown origin|open branches/i);
 });
 
@@ -80,9 +79,10 @@ test("publishes a fixed append-only topology with an explicitly absent center", 
 test("renders the spatial commit ledger as rooms or retained features", async () => {
   const html = await renderedPage("commits");
 
-  assert.match(html, /these are the changes in the order they happened/i);
+  assert.match(html, /the building, in the order it happened/i);
+  assert.match(html, /nothing overwritten/i);
   assert.match(html, /room added/i);
-  assert.match(html, /thing added/i);
+  assert.match(html, /feature retained/i);
   assert.match(html, /the-gallery-kept-the-return/i);
   assert.doesNotMatch(html, /surviving order|record access|<aside/i);
 });

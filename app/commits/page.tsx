@@ -20,45 +20,54 @@ export const metadata: Metadata = {
 
 export default function Commits() {
   return (
-    <main className="raw-shell">
-      <header className="raw-header">
-        <h1><Link href="/">echora.</Link></h1>
+    <main className="memory-shell memory-ledger-shell">
+      <header className="memory-header">
+        <Link className="memory-wordmark" href="/">echora.</Link>
         <nav aria-label="Main navigation">
-          <Link href="/">front</Link>
-          <span> / </span>
           <Link href="/structure">structure</Link>
-          <span> / </span>
-          <a href="/topology.json">topology</a>
+          <Link aria-current="page" href="/commits">changes</Link>
+          <a href="/topology.json">plan</a>
+          <a href="https://github.com/echoralife/echora">source ↗</a>
         </nav>
       </header>
 
-      <article className="raw-record raw-commit-record">
-        <h2>spatial commits</h2>
+      <section className="change-introduction">
+        <p>the building, in the order it happened</p>
+        <h1>twelve changes.<br />nothing overwritten.</h1>
         <p>
-          These are the changes in the order they happened. Each one added a
-          room or left something in a room that was already there.
+          Every entry below remains part of the present structure. A room holds
+          a thought kept once. A retained feature marks a thought encountered again.
         </p>
+      </section>
 
-        <div className="raw-commit-list">
-          {spatialCommits.map((commit) => {
-            const room = rooms.find((item) => item.id === commit.target);
-            return (
-              <section id={commit.id} key={commit.id}>
-                <h3>{commit.id}</h3>
+      <div className="change-ledger">
+        <header aria-hidden="true">
+          <span>change</span><span>what remains</span><span>kind / parent</span>
+        </header>
+        {spatialCommits.map((commit, index) => {
+          const room = rooms.find((item) => item.id === commit.target);
+          return (
+            <article id={commit.id} className="change-row" key={commit.id}>
+              <span className="change-number">{String(index + 1).padStart(2, "0")}</span>
+              <div className="change-copy">
+                <h2><a href={`#${commit.id}`}>{commit.id}</a></h2>
                 <p>{commit.change}.</p>
-                <small>
-                  {commit.operation === "new-room" ? "room added" : "thing added"}
-                  {" / "}{room?.label ?? commit.target}
-                  {" / parent: "}{commit.parent}
-                </small>
-              </section>
-            );
-          })}
-        </div>
-      </article>
+                <small>{room?.label ?? commit.target}</small>
+              </div>
+              <div className="change-origin">
+                <span>{commit.operation === "new-room" ? "room added" : "feature retained"}</span>
+                <span>
+                  parent: {commit.parent === "root" ? "root" : <a href={`#${commit.parent}`}>{commit.parent}</a>}
+                </span>
+              </div>
+            </article>
+          );
+        })}
+      </div>
 
-      <footer className="raw-footer">
-        <Link href="/">front</Link> / <Link href="/structure">current structure</Link>
+      <footer className="memory-footer">
+        <p>The final row is the current edge of memory.</p>
+        <p><Link href="/structure">walk the current structure</Link></p>
       </footer>
     </main>
   );
