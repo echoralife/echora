@@ -79,10 +79,9 @@ npm run check
 The check runs ESLint, creates a production static export, and validates the
 rendered pages, Three.js mechanism, and topology invariants.
 
-## Deployment
+## Production build
 
-`npm run build` writes a static export to `out/`. The included `firebase.json`
-publishes that directory with Firebase Hosting.
+`npm run build` writes a portable static export to `out/`.
 
 ## License
 
