@@ -124,7 +124,8 @@ export default function EchoraLearningRoom() {
       const roomGroup = new THREE.Group();
       roomGroup.position.copy(planPosition(room.id));
 
-      const floorGeometry = new THREE.BoxGeometry(2.05, 0.08, 1.48);
+      const isReturnHall = room.id === "return-hall";
+      const floorGeometry = new THREE.BoxGeometry(isReturnHall ? 3 : 2.05, 0.08, isReturnHall ? 0.82 : 1.48);
       const floor = new THREE.Mesh(floorGeometry, roomMaterial.clone());
       floor.receiveShadow = true;
       floor.castShadow = true;
@@ -137,14 +138,21 @@ export default function EchoraLearningRoom() {
             { size: [0.64, 0.44, 0.07], position: [-0.705, 0.54, -0.705] },
             { size: [0.64, 0.44, 0.07], position: [0.705, 0.54, -0.705] },
           ]
-        : [{ size: [2.05, 0.9, 0.07], position: [0, 0.49, -0.705] }];
+        : isReturnHall
+          ? [{ size: [3, 0.66, 0.07], position: [0, 0.37, -0.375] }]
+          : [{ size: [2.05, 0.9, 0.07], position: [0, 0.49, -0.705] }];
 
-      const wallParts = [
-        ...backWallParts,
-        { size: [0.07, 0.9, 1.48], position: [-0.99, 0.49, 0] },
-        { size: [0.07, 0.9, 0.5], position: [0.99, 0.49, -0.49] },
-        { size: [0.07, 0.9, 0.38], position: [0.99, 0.49, 0.55] },
-      ];
+      const wallParts = isReturnHall
+        ? [
+            ...backWallParts,
+            { size: [0.07, 0.66, 0.82], position: [-1.465, 0.37, 0] },
+          ]
+        : [
+            ...backWallParts,
+            { size: [0.07, 0.9, 1.48], position: [-0.99, 0.49, 0] },
+            { size: [0.07, 0.9, 0.5], position: [0.99, 0.49, -0.49] },
+            { size: [0.07, 0.9, 0.38], position: [0.99, 0.49, 0.55] },
+          ];
 
       for (const part of wallParts) {
         const geometry = new THREE.BoxGeometry(...part.size as [number, number, number]);

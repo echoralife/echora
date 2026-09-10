@@ -19,9 +19,10 @@ test("renders the restrained front record", async () => {
   assert.match(html, /the same room now holds both changes/i);
   assert.match(html, /the room now remembers both/i);
   assert.match(html, /if echora could rewrite an old room, change would be invisible/i);
-  assert.match(html, /fourteen commits currently form the building/i);
+  assert.match(html, /fifteen commits currently form the building/i);
   assert.match(html, /each thought became either a room or something left inside one/i);
-  assert.match(html, /eight rooms exist/i);
+  assert.match(html, /nine rooms exist/i);
+  assert.match(html, /return hall/i);
   assert.match(html, /the current plan, not to scale/i);
   assert.match(html, /href="\/structure"/i);
   assert.match(html, /href="\/commits"/i);
@@ -47,12 +48,13 @@ test("renders Echora's learning room and recorded learning controls", async () =
   assert.match(html, /each return changes the scale of what returned/i);
   assert.match(html, /memory becomes evidence when another observer can return to the same mark/i);
   assert.match(html, /repetition leaves direction before it leaves meaning/i);
+  assert.match(html, /a route repeated often enough becomes a place/i);
   assert.match(html, /from the first room/i);
   assert.match(html, /next room/i);
   assert.match(html, /NVIDIA Nemotron reads the surviving structure/i);
   assert.match(html, /Each thought becomes a room or a retained feature inside one/i);
   assert.match(html, /href="\/commits"/i);
-  assert.match(html, /github\.com\/echoralife\/echora\/commit\/82684589805f01a12bf853ae6217e06e37088281/i);
+  assert.match(html, /github\.com\/echoralife\/echora\/commit\/7363a4603798123b7155f7b3027a45f755f47a6b/i);
   assert.match(html, /https:\/\/x\.com\/echoralife/i);
   assert.doesNotMatch(html, /current structure|unbuilt|room-reading|Interactive Echora survey/i);
 });
@@ -81,6 +83,8 @@ test("uses Three.js for Echora, room construction, and local replay", async () =
   assert.match(source, /windowFrame/);
   assert.match(source, /worn-sill/);
   assert.match(source, /wornSill/);
+  assert.match(source, /return-hall/);
+  assert.match(source, /isReturnHall/);
   assert.doesNotMatch(source, /Math\.random|localStorage|wallet|token/i);
 });
 
@@ -95,16 +99,16 @@ test("publishes a fixed append-only topology for the Echora agent", async () => 
     movement: "follows the current commit",
   });
   assert.equal("center" in topology, false);
-  assert.equal(topology.rooms.length, 8);
-  assert.equal(topology.commits.length, 14);
-  assert.equal(topology.rooms.at(-1).id, "window-room");
-  assert.equal(topology.commits.at(-1).id, "the-threshold-kept-the-wear");
+  assert.equal(topology.rooms.length, 9);
+  assert.equal(topology.commits.length, 15);
+  assert.equal(topology.rooms.at(-1).id, "return-hall");
+  assert.equal(topology.commits.at(-1).id, "the-wear-became-a-room");
   assert.deepEqual(new Set(topology.commits.map((commit) => commit.operation)), new Set(["new-room", "add-feature"]));
   assert.match(topology.rule, /may remove nothing/i);
 
   const roomIds = new Set(topology.rooms.map((room) => room.id));
   const githubCommits = new Set(topology.commits.map((commit) => commit.githubCommit));
-  assert.equal(githubCommits.size, 14);
+  assert.equal(githubCommits.size, 15);
   topology.commits.forEach((commit, index) => {
     assert.ok(roomIds.has(commit.target), commit.id);
     assert.ok(commit.learning.length > 10, commit.id);
@@ -122,8 +126,8 @@ test("renders the spatial commit ledger as rooms or retained features", async ()
   assert.match(html, /room added/i);
   assert.match(html, /feature retained/i);
   assert.match(html, /the-gallery-kept-the-return/i);
-  assert.equal((html.match(/href="https:\/\/github\.com\/echoralife\/echora\/commit\/[a-f0-9]{40}"/gi) ?? []).length, 14);
-  assert.match(html, /github\.com\/echoralife\/echora\/commit\/82684589805f01a12bf853ae6217e06e37088281/i);
+  assert.equal((html.match(/href="https:\/\/github\.com\/echoralife\/echora\/commit\/[a-f0-9]{40}"/gi) ?? []).length, 15);
+  assert.match(html, /github\.com\/echoralife\/echora\/commit\/7363a4603798123b7155f7b3027a45f755f47a6b/i);
   assert.match(html, /https:\/\/x\.com\/echoralife/i);
   assert.doesNotMatch(html, /surviving order|record access|<aside/i);
 });

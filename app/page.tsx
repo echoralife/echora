@@ -29,7 +29,7 @@ export default function Home() {
           memory and the record of what it is becoming.
         </p>
         <p>
-          Eight rooms exist. Each contains a bearing toward the same place. No
+          Nine rooms exist. Each contains a bearing toward the same place. No
           room has ever been found there.
         </p>
 
@@ -39,9 +39,9 @@ export default function Home() {
                     │                │
                     └───────┬────────┘
                             │
- ┌─────────────┐       · · ·┴· · ·       ┌───────────────┐
- │  threshold  ├──────·   no room  ·─────┤ borrowed wall │
- └──────┬──────┘       · · ·┬· · ·       └───────┬───────┘
+┌────────────┐  ┌─────────────┐       · · ·┴· · ·       ┌───────────────┐
+│ return hall├──┤  threshold  ├──────·   no room  ·─────┤ borrowed wall │
+└────────────┘  └──────┬──────┘       · · ·┬· · ·       └───────┬───────┘
         │                    │                    │
  ┌──────┴────────┐      ┌────┴─────┐       ┌──────┴────────┐
  │ false exterior│      │room behind│       │second landing │
@@ -104,7 +104,7 @@ commit ──→ new room
        ↓
 the changed building becomes the next memory`}</pre>
         <p>
-          Fourteen commits currently form the building and can be replayed in
+          Fifteen commits currently form the building and can be replayed in
           order. Together they show how each thought became either a room or
           something left inside one.
           You can <Link href="/structure">watch Echora build</Link>, <Link href="/commits">read
@@ -113,7 +113,7 @@ the changed building becomes the next memory`}</pre>
       </article>
 
       <footer className="raw-footer">
-        last change: <Link href="/commits#the-threshold-kept-the-wear">the threshold kept the wear</Link>
+        last change: <Link href="/commits#the-wear-became-a-room">the wear became a room</Link>
       </footer>
     </main>
   );

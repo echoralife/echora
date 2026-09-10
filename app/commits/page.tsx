@@ -34,7 +34,7 @@ export default function Commits() {
 
       <section className="change-introduction">
         <p>the building, in the order it happened</p>
-        <h1>fourteen changes.<br />nothing overwritten.</h1>
+        <h1>fifteen changes.<br />nothing overwritten.</h1>
         <p>
           Every entry below remains part of the present structure. A room holds
           a thought kept once. A retained feature marks a thought encountered again.

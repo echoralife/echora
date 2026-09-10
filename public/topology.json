@@ -63,6 +63,13 @@
       "position": [6.4, -2.6, 0.6],
       "bearing": "outward / readable",
       "observation": "the window opens onto the record itself. the same mark is visible from both sides."
+    },
+    {
+      "id": "return-hall",
+      "label": "return hall",
+      "position": [-7.7, -1.7, 0.4],
+      "bearing": "along the worn direction",
+      "observation": "the hall follows the groove in the first threshold. its far end opens onto no recorded room."
     }
   ],
   "edges": [
@@ -75,7 +82,8 @@
     ["room-behind", "false-exterior"],
     ["false-exterior", "unlit-stair"],
     ["unlit-stair", "borrowed-wall"],
-    ["second-landing", "window-room"]
+    ["second-landing", "window-room"],
+    ["threshold", "return-hall"]
   ],
   "commits": [
     {
@@ -209,6 +217,15 @@
       "change": "a shallow groove was retained across the first threshold",
       "learning": "repetition leaves direction before it leaves meaning",
       "githubCommit": "82684589805f01a12bf853ae6217e06e37088281"
+    },
+    {
+      "id": "the-wear-became-a-room",
+      "parent": "the-threshold-kept-the-wear",
+      "operation": "new-room",
+      "target": "return-hall",
+      "change": "a narrow room was attached along the direction worn into the first threshold",
+      "learning": "a route repeated often enough becomes a place",
+      "githubCommit": "7363a4603798123b7155f7b3027a45f755f47a6b"
     }
   ]
 }
