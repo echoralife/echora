@@ -52,7 +52,12 @@ test("uses Three.js for Echora, room construction, and local replay", async () =
 
   assert.match(source, /from "three"/);
   assert.match(source, /THREE\.WebGLRenderer/);
-  assert.match(source, /THREE\.OctahedronGeometry/);
+  assert.match(source, /bodyOutline/);
+  assert.match(source, /faceShape/);
+  assert.match(source, /THREE\.SphereGeometry/);
+  assert.match(source, /THREE\.ShapeGeometry/);
+  assert.match(source, /makeLeg/);
+  assert.match(source, /curiousTilt/);
   assert.match(source, /THREE\.GridHelper/);
   assert.match(source, /roomObjectsRef/);
   assert.match(source, /cargoRef/);

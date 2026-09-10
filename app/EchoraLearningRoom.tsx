@@ -43,7 +43,7 @@ export default function EchoraLearningRoom() {
   const featureObjectsRef = useRef(new Map<string, THREE.Group>());
   const connectorObjectsRef = useRef(new Map<string, THREE.Line>());
   const agentRef = useRef<THREE.Group | null>(null);
-  const cargoRef = useRef<THREE.Mesh | null>(null);
+  const cargoRef = useRef<THREE.Group | null>(null);
   const agentDestinationRef = useRef(planPosition(spatialCommits.at(-1)?.target ?? "threshold", 0.82));
   const cameraTargetRef = useRef(new THREE.Vector3());
   const buildTargetRef = useRef<THREE.Object3D | null>(null);
@@ -211,48 +211,100 @@ export default function EchoraLearningRoom() {
     const agent = new THREE.Group();
     agent.position.copy(agentDestinationRef.current);
     const agentForm = new THREE.Group();
-    const agentBlue = new THREE.MeshStandardMaterial({ color: blue, roughness: 0.52 });
+    const agentBlue = new THREE.MeshStandardMaterial({ color: blue, roughness: 0.64 });
     const agentBlack = new THREE.MeshStandardMaterial({ color: ink, roughness: 0.8 });
+    const agentWhite = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.92 });
 
-    const coreGeometry = new THREE.OctahedronGeometry(0.42, 0);
-    const core = new THREE.Mesh(coreGeometry, agentBlue);
-    core.scale.y = 0.78;
-    core.castShadow = true;
-    agentForm.add(core, makeEdges(coreGeometry));
+    const body = new THREE.Group();
+    const bodyGeometry = new THREE.SphereGeometry(0.4, 24, 16);
+    const bodyOutline = new THREE.Mesh(
+      bodyGeometry,
+      new THREE.MeshBasicMaterial({ color: ink, side: THREE.BackSide }),
+    );
+    bodyOutline.position.y = 0.13;
+    bodyOutline.scale.set(1.02, 0.96, 0.9);
+    body.add(bodyOutline);
 
-    const lens = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.12, 0.12), agentBlack);
-    lens.position.set(0, 0.03, 0.34);
-    agentForm.add(lens);
+    const bodyShell = new THREE.Mesh(bodyGeometry, agentBlue);
+    bodyShell.position.y = 0.13;
+    bodyShell.scale.set(0.97, 0.91, 0.85);
+    bodyShell.castShadow = true;
+    body.add(bodyShell);
 
-    const legAnchors = [
-      new THREE.Vector3(-0.22, -0.18, 0.05),
-      new THREE.Vector3(0.2, -0.18, 0.1),
-      new THREE.Vector3(0, -0.18, -0.18),
-    ];
-    const knees = [
-      new THREE.Vector3(-0.5, -0.42, 0.2),
-      new THREE.Vector3(0.48, -0.45, 0.28),
-      new THREE.Vector3(0.04, -0.4, -0.47),
-    ];
-    const feet = [
-      new THREE.Vector3(-0.56, -0.78, 0.3),
-      new THREE.Vector3(0.58, -0.78, 0.38),
-      new THREE.Vector3(0.08, -0.78, -0.58),
-    ];
-    for (let index = 0; index < legAnchors.length; index += 1) {
-      agentForm.add(makeBar(legAnchors[index], knees[index], agentBlack));
-      agentForm.add(makeBar(knees[index], feet[index], agentBlack));
-      const foot = new THREE.Mesh(new THREE.SphereGeometry(0.065, 8, 6), agentBlue.clone());
-      foot.position.copy(feet[index]);
-      agentForm.add(foot);
+    const earGeometry = new THREE.ConeGeometry(0.105, 0.23, 4);
+    for (const side of [-1, 1] as const) {
+      const ear = new THREE.Mesh(earGeometry, agentBlue.clone());
+      ear.position.set(side * 0.22, 0.48, -0.015);
+      ear.rotation.z = side * -0.16;
+      ear.rotation.y = Math.PI / 4;
+      body.add(ear);
+      const earEdge = makeEdges(earGeometry);
+      earEdge.position.copy(ear.position);
+      earEdge.rotation.copy(ear.rotation);
+      body.add(earEdge);
     }
 
-    const cargo = new THREE.Mesh(
-      new THREE.BoxGeometry(0.2, 0.2, 0.2),
-      new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.8 }),
-    );
-    cargo.add(makeEdges(new THREE.BoxGeometry(0.2, 0.2, 0.2), blue));
-    cargo.position.set(0.62, 0.05, 0.08);
+    const faceShape = new THREE.Shape();
+    faceShape.moveTo(-0.18, -0.15);
+    faceShape.lineTo(0.18, -0.15);
+    faceShape.lineTo(0.18, 0.04);
+    faceShape.absarc(0, 0.04, 0.18, 0, Math.PI, false);
+    faceShape.lineTo(-0.18, -0.15);
+    faceShape.closePath();
+    const face = new THREE.Mesh(new THREE.ShapeGeometry(faceShape), agentWhite);
+    face.position.set(0, 0.12, 0.348);
+    body.add(face);
+
+    const lens = new THREE.Group();
+    lens.position.set(0, 0.21, 0.37);
+    for (const side of [-1, 1] as const) {
+      const eye = new THREE.Mesh(new THREE.SphereGeometry(0.052, 14, 9), agentBlack);
+      eye.position.x = side * 0.078;
+      lens.add(eye);
+    }
+    body.add(lens);
+
+    const mouth = new THREE.Mesh(new THREE.SphereGeometry(0.024, 10, 7), agentBlack.clone());
+    mouth.position.set(0, 0.08, 0.372);
+    mouth.scale.y = 0.72;
+    body.add(mouth);
+    agentForm.add(body);
+
+    function makeLeg(side: -1 | 1) {
+      const leg = new THREE.Group();
+      leg.position.set(side * 0.18, -0.16, 0);
+      const knee = new THREE.Vector3(side * 0.055, -0.21, 0.05);
+      const footPosition = new THREE.Vector3(side * 0.075, -0.48, 0.1);
+      leg.add(makeBar(new THREE.Vector3(), knee, agentBlack));
+      leg.add(makeBar(knee, footPosition, agentBlack));
+      const foot = new THREE.Mesh(new THREE.SphereGeometry(0.085, 12, 8), agentWhite.clone());
+      foot.scale.set(1.3, 0.74, 1.35);
+      foot.position.copy(footPosition);
+      leg.add(foot);
+      agentForm.add(leg);
+      return leg;
+    }
+
+    const leftLeg = makeLeg(-1);
+    const rightLeg = makeLeg(1);
+
+    const leftHandPosition = new THREE.Vector3(-0.48, -0.02, 0.08);
+    const rightHandPosition = new THREE.Vector3(0.48, -0.02, 0.08);
+    agentForm.add(makeBar(new THREE.Vector3(-0.32, 0.15, 0.02), leftHandPosition, agentBlack));
+    agentForm.add(makeBar(new THREE.Vector3(0.32, 0.15, 0.02), rightHandPosition, agentBlack));
+    for (const handPosition of [leftHandPosition, rightHandPosition]) {
+      const hand = new THREE.Mesh(new THREE.SphereGeometry(0.052, 10, 7), agentWhite.clone());
+      hand.position.copy(handPosition);
+      agentForm.add(hand);
+    }
+
+    const cargo = new THREE.Group();
+    const carriedRoomGeometry = new THREE.BoxGeometry(0.22, 0.22, 0.22);
+    const carriedRoom = new THREE.Mesh(carriedRoomGeometry, agentWhite.clone());
+    carriedRoom.position.set(0.65, -0.02, 0.08);
+    const carriedRoomEdges = makeEdges(carriedRoomGeometry, blue);
+    carriedRoomEdges.position.copy(carriedRoom.position);
+    cargo.add(carriedRoom, carriedRoomEdges);
     cargo.visible = false;
     agentForm.add(cargo);
 
@@ -355,6 +407,14 @@ export default function EchoraLearningRoom() {
           if (placementRef.current === 0) cargo.visible = false;
         }
       }
+
+      const stride = remaining > 0.025 && !reduceMotion ? Math.sin(elapsed * 13) * 0.18 : 0;
+      leftLeg.rotation.z += (stride - leftLeg.rotation.z) * 0.24;
+      rightLeg.rotation.z += (-stride - rightLeg.rotation.z) * 0.24;
+      const curiousTilt = reduceMotion ? 0 : Math.sin(elapsed * 1.7) * 0.035;
+      body.rotation.z += (curiousTilt - body.rotation.z) * 0.08;
+      const blink = !reduceMotion && elapsed % 4.6 > 4.42 ? 0.18 : 1;
+      lens.scale.y += (blink - lens.scale.y) * 0.32;
 
       const buildTarget = buildTargetRef.current;
       if (buildTarget && buildTarget.scale.y < 0.999) {

@@ -36,7 +36,7 @@ the changed structure becomes the next memory
   commits.
 - Two legal operations: `new-room` and `add-feature`.
 - A Three.js learning room that can be turned and replayed one change at a time.
-- A distinct tripod-like Echora that moves to each room being made or revised.
+- A small cobalt Echora mascot that walks to each room being made or revised.
 - A current-learning sheet and an inspectable margin of earlier learnings.
 - A public JSON record at [`public/topology.json`](public/topology.json).
 
