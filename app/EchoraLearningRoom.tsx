@@ -546,6 +546,13 @@ export default function EchoraLearningRoom() {
           <h1>{currentCommit.learning}.</h1>
           <blockquote>{currentRoom.observation}</blockquote>
           <small>{currentCommit.change}</small>
+          <a
+            className="current-learning-commit"
+            href={`https://github.com/echoralife/echora/commit/${currentCommit.githubCommit}`}
+            rel="noreferrer"
+          >
+            github commit {currentCommit.githubCommit.slice(0, 7)} ↗
+          </a>
         </article>
 
         <p className="learning-instruction">drag to turn / scroll to move closer</p>

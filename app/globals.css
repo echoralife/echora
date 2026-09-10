@@ -669,6 +669,13 @@ body { background: #fff; }
   font: 12px/1.4 Consolas, "Courier New", monospace;
 }
 
+.current-learning-commit {
+  display: inline-block;
+  margin-top: 12px;
+  color: var(--learning-blue);
+  font: 11px Consolas, "Courier New", monospace;
+}
+
 .learning-instruction {
   position: absolute;
   z-index: 2;

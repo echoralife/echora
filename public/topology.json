@@ -76,7 +76,8 @@
       "operation": "new-room",
       "target": "threshold",
       "change": "the first surviving room was fixed around an open boundary",
-      "learning": "a boundary can remain even when arrival is forgotten"
+      "learning": "a boundary can remain even when arrival is forgotten",
+      "githubCommit": "7499fd032fbb3c64a4021f8f07319209809d904d"
     },
     {
       "id": "an-echo-required-another-wall",
@@ -84,7 +85,8 @@
       "operation": "new-room",
       "target": "echo-gallery",
       "change": "a chamber was attached where the first room returned a sound",
-      "learning": "an echo proves distance, but not its shape"
+      "learning": "an echo proves distance, but not its shape",
+      "githubCommit": "6af80e090571d805a3b57e8195861564029fba8d"
     },
     {
       "id": "the-threshold-kept-a-second-lintel",
@@ -93,7 +95,8 @@
       "target": "threshold",
       "feature": "second-lintel",
       "change": "a second lintel preserved the height of a door that never arrived",
-      "learning": "a revision can be kept without erasing its first form"
+      "learning": "a revision can be kept without erasing its first form",
+      "githubCommit": "244c9b8546d80722439071cc4a3239cea9db6430"
     },
     {
       "id": "the-measurement-borrowed-a-wall",
@@ -101,7 +104,8 @@
       "operation": "new-room",
       "target": "borrowed-wall",
       "change": "a room was attached to contain a measurement from elsewhere",
-      "learning": "a measurement can describe something no longer present"
+      "learning": "a measurement can describe something no longer present",
+      "githubCommit": "38f8845a2e9ea2975aa74477f6c5dccfa7bcd48a"
     },
     {
       "id": "the-measurement-left-ticks",
@@ -110,7 +114,8 @@
       "target": "borrowed-wall",
       "feature": "measure-ticks",
       "change": "five marks were retained where the borrowed measure met the wall",
-      "learning": "repetition becomes evidence when it leaves a mark"
+      "learning": "repetition becomes evidence when it leaves a mark",
+      "githubCommit": "c5a85a44dcf0b13150f40497a8bf6b2d39778b19"
     },
     {
       "id": "the-stair-arrived-twice",
@@ -118,7 +123,8 @@
       "operation": "new-room",
       "target": "second-landing",
       "change": "a second landing was attached to the same descent",
-      "learning": "sequence alone cannot prove which landing came first"
+      "learning": "sequence alone cannot prove which landing came first",
+      "githubCommit": "11ecd2e26a30adf7b89743a2dddf638e68911bbd"
     },
     {
       "id": "the-landing-kept-the-lower-steps",
@@ -127,7 +133,8 @@
       "target": "second-landing",
       "feature": "lower-steps",
       "change": "three steps were fixed beneath a floor that does not lower",
-      "learning": "a route may remain after its destination is gone"
+      "learning": "a route may remain after its destination is gone",
+      "githubCommit": "91b1444a511eea3882b2d3e1f9e0165f4290c93a"
     },
     {
       "id": "the-rear-wall-produced-a-room",
@@ -135,7 +142,8 @@
       "operation": "new-room",
       "target": "room-behind",
       "change": "the rear wall became the parent of another chamber",
-      "learning": "some rooms appear only through the act of leaving"
+      "learning": "some rooms appear only through the act of leaving",
+      "githubCommit": "3853bc4a96d7a0486dfb5f165bfa752838f32cd9"
     },
     {
       "id": "the-threshold-grew-an-outside",
@@ -143,7 +151,8 @@
       "operation": "new-room",
       "target": "false-exterior",
       "change": "an exterior was attached without leaving the structure",
-      "learning": "an outside can be represented without being reached"
+      "learning": "an outside can be represented without being reached",
+      "githubCommit": "a4f0d97704a136b87626656c3ba39d9c3940a1e4"
     },
     {
       "id": "the-sky-kept-a-ceiling-line",
@@ -152,7 +161,8 @@
       "target": "false-exterior",
       "feature": "ceiling-cross",
       "change": "two ceiling lines remained where open sky should have continued",
-      "learning": "a boundary can be known by where motion stops"
+      "learning": "a boundary can be known by where motion stops",
+      "githubCommit": "8f3aee24368816eb5adb4261c91e4c7ab75017b2"
     },
     {
       "id": "the-unlit-stair-descended-nowhere",
@@ -160,7 +170,8 @@
       "operation": "new-room",
       "target": "unlit-stair",
       "change": "a stairwell was attached beneath a descent with no lower floor",
-      "learning": "wear proves contact, not access"
+      "learning": "wear proves contact, not access",
+      "githubCommit": "6918ac176603f3208624d6765141c3cec03b0b78"
     },
     {
       "id": "the-gallery-kept-the-return",
@@ -169,7 +180,8 @@
       "target": "echo-gallery",
       "feature": "returning-frame",
       "change": "two interior frames preserved the decreasing return of the echo",
-      "learning": "each return changes the scale of what returned"
+      "learning": "each return changes the scale of what returned",
+      "githubCommit": "8bdae7d6ff6b7aa84f18f1afb9a611512cc4f225"
     }
   ]
 }

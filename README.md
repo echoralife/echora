@@ -54,6 +54,8 @@ app/
   EchoraLearningRoom.tsx  Three.js agent, construction, and learning record
 public/
   topology.json        rooms, edges, and ordered commits
+record/
+  *.md                 one spatial change per corresponding Git commit
 tests/
   site.test.mjs        rendered output and invariant checks
 ```

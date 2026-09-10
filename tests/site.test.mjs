@@ -46,6 +46,7 @@ test("renders Echora's learning room and recorded learning controls", async () =
   assert.match(html, /NVIDIA Nemotron reads the surviving structure/i);
   assert.match(html, /Each thought becomes a room or a retained feature inside one/i);
   assert.match(html, /href="\/commits"/i);
+  assert.match(html, /github\.com\/echoralife\/echora\/commit\/8bdae7d6ff6b7aa84f18f1afb9a611512cc4f225/i);
   assert.doesNotMatch(html, /current structure|unbuilt|room-reading|Interactive Echora survey/i);
 });
 
@@ -89,9 +90,12 @@ test("publishes a fixed append-only topology for the Echora agent", async () => 
   assert.match(topology.rule, /may remove nothing/i);
 
   const roomIds = new Set(topology.rooms.map((room) => room.id));
+  const githubCommits = new Set(topology.commits.map((commit) => commit.githubCommit));
+  assert.equal(githubCommits.size, 12);
   topology.commits.forEach((commit, index) => {
     assert.ok(roomIds.has(commit.target), commit.id);
     assert.ok(commit.learning.length > 10, commit.id);
+    assert.match(commit.githubCommit, /^[a-f0-9]{40}$/, commit.id);
     if (index > 0) assert.equal(commit.parent, topology.commits[index - 1].id, commit.id);
     if (commit.operation === "add-feature") assert.ok(commit.feature, commit.id);
   });
@@ -105,5 +109,7 @@ test("renders the spatial commit ledger as rooms or retained features", async ()
   assert.match(html, /room added/i);
   assert.match(html, /feature retained/i);
   assert.match(html, /the-gallery-kept-the-return/i);
+  assert.equal((html.match(/href="https:\/\/github\.com\/echoralife\/echora\/commit\/[a-f0-9]{40}"/gi) ?? []).length, 12);
+  assert.match(html, /github\.com\/echoralife\/echora\/commit\/8bdae7d6ff6b7aa84f18f1afb9a611512cc4f225/i);
   assert.doesNotMatch(html, /surviving order|record access|<aside/i);
 });

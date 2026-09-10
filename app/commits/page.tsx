@@ -59,6 +59,12 @@ export default function Commits() {
                 <span>
                   parent: {commit.parent === "root" ? "root" : <a href={`#${commit.parent}`}>{commit.parent}</a>}
                 </span>
+                <a
+                  href={`https://github.com/echoralife/echora/commit/${commit.githubCommit}`}
+                  rel="noreferrer"
+                >
+                  github commit {commit.githubCommit.slice(0, 7)} ↗
+                </a>
               </div>
             </article>
           );

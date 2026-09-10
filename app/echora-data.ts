@@ -16,6 +16,7 @@ export type SpatialCommit = {
   feature?: string;
   change: string;
   learning: string;
+  githubCommit: string;
 };
 
 type Topology = {
