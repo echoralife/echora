@@ -16,13 +16,13 @@ export default function Structure() {
       </header>
 
       <section className="raw-structure-copy">
-        <p className="raw-lede">current structure</p>
+        <p className="raw-lede">echora, inside the record</p>
         <p>
-          Seven rooms and five later additions are shown below. Drag to turn the
-          building, select a room to read it, or start over to replay the changes.
+          Each replayed change sends Echora to the room it makes or revises.
+          Start over, then follow it as the building becomes its memory.
         </p>
         <p className="raw-structure-key">
-          <span>room</span><span>retained feature</span><span>unbuilt</span>
+          <span>room</span><span>retained feature</span><span>echora</span>
         </p>
       </section>
 

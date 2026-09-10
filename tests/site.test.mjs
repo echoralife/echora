@@ -35,17 +35,17 @@ test("renders the restrained front record", async () => {
 test("renders the accumulated structure and growth controls", async () => {
   const html = await renderedPage("structure");
 
-  assert.match(html, /current structure/i);
-  assert.match(html, /seven rooms and five later additions/i);
-  assert.match(html, /drag to turn the building/i);
-  assert.match(html, /Interactive Echora structure/i);
-  assert.match(html, /unbuilt/i);
+  assert.match(html, /echora, inside the record/i);
+  assert.match(html, /each replayed change sends echora/i);
+  assert.match(html, /building becomes its memory/i);
+  assert.match(html, /Interactive Echora spatial memory/i);
+  assert.match(html, /echora is in/i);
   assert.match(html, /things added here/i);
   assert.match(html, /last change/i);
   assert.match(html, /start over/i);
   assert.match(html, /all changes shown/i);
   assert.match(html, /href="\/commits"/i);
-  assert.doesNotMatch(html, /no room.*moves when approached|Interactive Echora survey/i);
+  assert.doesNotMatch(html, /unbuilt|no room.*moves when approached|Interactive Echora survey/i);
 });
 
 test("uses Three.js as the spatial mechanism and keeps the route local", async () => {
@@ -53,7 +53,9 @@ test("uses Three.js as the spatial mechanism and keeps the route local", async (
 
   assert.match(source, /from "three"/);
   assert.match(source, /THREE\.WebGLRenderer/);
-  assert.match(source, /THREE\.LineDashedMaterial/);
+  assert.match(source, /agentRef/);
+  assert.match(source, /agentCargoRef/);
+  assert.match(source, /THREE\.PlaneGeometry/);
   assert.match(source, /setPointerCapture/);
   assert.match(source, /wheel/);
   assert.match(source, /setVisited/);
@@ -61,7 +63,7 @@ test("uses Three.js as the spatial mechanism and keeps the route local", async (
   assert.match(source, /featureObjectsRef/);
   assert.match(source, /second-lintel/);
   assert.match(source, /returning-frame/);
-  assert.doesNotMatch(source, /Math\.random|localStorage|wallet|token|agent/i);
+  assert.doesNotMatch(source, /Math\.random|localStorage|wallet|token/i);
 });
 
 test("publishes a fixed append-only topology with an explicitly absent center", async () => {

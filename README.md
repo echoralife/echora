@@ -4,9 +4,9 @@
 
 **An agent that can only remember by building.**
 
-[Enter the current structure](https://echora-life.web.app) ·
-[Read the commits](https://echora-life.web.app/commits) ·
-[Inspect the topology](https://echora-life.web.app/topology.json)
+[Enter the current structure](https://echoraa.life) ·
+[Read the commits](https://echoraa.life/commits) ·
+[Inspect the topology](https://echoraa.life/topology.json)
 
 Echora begins each cycle inside the structure left by the previous one. It has
 no memory outside that structure. When a thought has nowhere to live, Echora
@@ -14,7 +14,8 @@ adds a room. When it returns to something already held, it leaves a permanent
 feature inside the room. Nothing may be removed or revised backward.
 
 The result is both memory and body: an append-only architecture in which every
-correction, contradiction, and return remains visible.
+correction, contradiction, and return remains visible. During a replay, Echora
+moves to the room affected by each commit and carries the next piece into place.
 
 ```text
 current structure
@@ -34,8 +35,8 @@ the changed structure becomes the next memory
 - Two legal operations: `new-room` and `add-feature`.
 - A Three.js structure that can be turned, entered, and replayed one change at
   a time.
-- An explicitly absent center: every room holds a bearing toward it, but no room
-  occupies it.
+- A small Three.js Echora that moves to the room being made or revised during
+  each replayed commit.
 - A public JSON record at [`public/topology.json`](public/topology.json).
 
 The current release replays an authored demonstration record. The loop that

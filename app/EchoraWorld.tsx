@@ -12,8 +12,12 @@ export default function EchoraWorld() {
   const roomObjectsRef = useRef(new Map<string, { wire: THREE.LineSegments; fill: THREE.Mesh }>());
   const featureObjectsRef = useRef(new Map<string, THREE.Object3D>());
   const edgeObjectsRef = useRef(new Map<string, THREE.LineSegments>());
-  const centerRef = useRef<THREE.LineSegments | null>(null);
-  const centerLabelRef = useRef<HTMLParagraphElement>(null);
+  const agentRef = useRef<THREE.Group | null>(null);
+  const agentCargoRef = useRef<THREE.Mesh | null>(null);
+  const agentLabelRef = useRef<HTMLParagraphElement>(null);
+  const agentDestinationRef = useRef(new THREE.Vector3(...rooms[0].position).add(new THREE.Vector3(0, -0.1, 0.62)));
+  const lastCommitStepRef = useRef(spatialCommits.length);
+  const placementRef = useRef(0);
   const [activeId, setActiveId] = useState("threshold");
   const [visited, setVisited] = useState<string[]>(["threshold"]);
   const [commitStep, setCommitStep] = useState(spatialCommits.length);
@@ -44,10 +48,8 @@ export default function EchoraWorld() {
     const next = spatialCommits[commitStep];
     if (!next) return;
     setCommitStep((current) => current + 1);
-    if (next.operation === "new-room") {
-      setActiveId(next.target);
-      setVisited((current) => current.at(-1) === next.target ? current : [...current, next.target]);
-    }
+    setActiveId(next.target);
+    setVisited((current) => current.at(-1) === next.target ? current : [...current, next.target]);
   }
 
   useEffect(() => {
@@ -55,6 +57,21 @@ export default function EchoraWorld() {
     const position = new THREE.Vector3(...room.position);
     targetRef.current.copy(position).multiplyScalar(0.22);
     cameraDestinationRef.current.copy(position).multiplyScalar(0.34).add(new THREE.Vector3(0, 0.5, 12.5));
+    agentDestinationRef.current.copy(position).add(new THREE.Vector3(0, -0.1, 0.62));
+
+    const previousStep = lastCommitStepRef.current;
+    if (commitStep < previousStep && agentRef.current) {
+      agentRef.current.position.copy(agentDestinationRef.current);
+      if (agentCargoRef.current) agentCargoRef.current.visible = false;
+      placementRef.current = 0;
+    } else if (commitStep > previousStep) {
+      if (agentCargoRef.current) {
+        agentCargoRef.current.visible = true;
+        agentCargoRef.current.scale.setScalar(1);
+      }
+      placementRef.current = 1;
+    }
+    lastCommitStepRef.current = commitStep;
 
     const roomIds = new Set(spatialCommits.slice(0, commitStep).filter((commit) => commit.operation === "new-room").map((commit) => commit.target));
     const featureIds = new Set(spatialCommits.slice(0, commitStep).filter((commit) => commit.operation === "add-feature").map((commit) => commit.id));
@@ -78,12 +95,6 @@ export default function EchoraWorld() {
       edge.visible = roomIds.has(from) && roomIds.has(to);
     });
 
-    if (centerRef.current) {
-      const away = position.lengthSq() === 0
-        ? new THREE.Vector3(0, 0, -4)
-        : position.clone().normalize().multiplyScalar(-4.4);
-      centerRef.current.position.copy(away);
-    }
   }, [activeId, visited, commitStep]);
 
   useEffect(() => {
@@ -209,20 +220,57 @@ export default function EchoraWorld() {
       featureObjectsRef.current.set(commit.id, feature);
     }
 
-    const missingGeometry = new THREE.EdgesGeometry(new THREE.BoxGeometry(2.05, 1.55, 1.1));
-    const missingMaterial = new THREE.LineDashedMaterial({
-      color: 0x7d5048,
-      dashSize: 0.18,
-      gapSize: 0.14,
-      transparent: true,
-      opacity: 0.7,
-    });
-    const missingRoom = new THREE.LineSegments(missingGeometry, missingMaterial);
-    missingRoom.computeLineDistances();
-    missingRoom.rotation.set(0.12, 0.26, -0.06);
-    missingRoom.position.copy(new THREE.Vector3(...rooms[0].position).normalize().multiplyScalar(-4.4));
-    structure.add(missingRoom);
-    centerRef.current = missingRoom;
+    const echora = new THREE.Group();
+    echora.position.copy(agentDestinationRef.current);
+
+    const agentForm = new THREE.Group();
+    const agentLineMaterial = new THREE.LineBasicMaterial({ color: 0x171717 });
+    const shell = new THREE.LineSegments(
+      new THREE.EdgesGeometry(new THREE.BoxGeometry(0.62, 0.72, 0.5)),
+      agentLineMaterial,
+    );
+    shell.position.y = 0.02;
+    agentForm.add(shell);
+
+    const crown = new THREE.LineSegments(
+      new THREE.EdgesGeometry(new THREE.BoxGeometry(0.34, 0.22, 0.34)),
+      agentLineMaterial.clone(),
+    );
+    crown.position.set(0, 0.49, -0.02);
+    agentForm.add(crown);
+
+    for (const x of [-0.19, 0.19]) {
+      const support = new THREE.LineSegments(
+        new THREE.EdgesGeometry(new THREE.BoxGeometry(0.13, 0.3, 0.16)),
+        agentLineMaterial.clone(),
+      );
+      support.position.set(x, -0.47, 0.02);
+      agentForm.add(support);
+    }
+
+    const blueMaterial = new THREE.MeshBasicMaterial({ color: 0x164fd7, side: THREE.DoubleSide });
+    const doorway = new THREE.Mesh(new THREE.PlaneGeometry(0.18, 0.34), blueMaterial);
+    doorway.position.set(0, -0.14, 0.256);
+    agentForm.add(doorway);
+
+    const carryingLineGeometry = new THREE.BufferGeometry();
+    carryingLineGeometry.setAttribute("position", new THREE.Float32BufferAttribute([
+      0.31, 0.04, 0, 0.53, 0.04, 0,
+    ], 3));
+    agentForm.add(new THREE.LineSegments(carryingLineGeometry, agentLineMaterial.clone()));
+
+    const cargo = new THREE.Mesh(
+      new THREE.BoxGeometry(0.16, 0.16, 0.16),
+      blueMaterial.clone(),
+    );
+    cargo.position.set(0.62, 0.04, 0);
+    cargo.visible = false;
+    agentForm.add(cargo);
+
+    echora.add(agentForm);
+    structure.add(echora);
+    agentRef.current = echora;
+    agentCargoRef.current = cargo;
 
     const orbit = { yaw: -0.1, pitch: -0.08, zoom: 16 };
     const pointer = { active: false, x: 0, y: 0 };
@@ -275,9 +323,12 @@ export default function EchoraWorld() {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const worldPosition = new THREE.Vector3();
     const projected = new THREE.Vector3();
+    const agentDelta = new THREE.Vector3();
+    let elapsed = 0;
 
     function animate() {
       frame = requestAnimationFrame(animate);
+      elapsed += 1 / 60;
       structure.rotation.y += (orbit.yaw - structure.rotation.y) * 0.055;
       structure.rotation.x += (orbit.pitch - structure.rotation.x) * 0.055;
       if (!reduceMotion && !pointer.active) orbit.yaw += 0.00045;
@@ -286,6 +337,22 @@ export default function EchoraWorld() {
       desired.z = orbit.zoom;
       camera.position.lerp(desired, reduceMotion ? 1 : 0.045);
       camera.lookAt(targetRef.current);
+
+      agentDelta.subVectors(agentDestinationRef.current, echora.position);
+      const agentDistance = agentDelta.length();
+      if (agentDistance > 0.025) {
+        const distance = reduceMotion ? agentDistance : Math.min(agentDistance, 0.028 + agentDistance * 0.035);
+        echora.position.addScaledVector(agentDelta.normalize(), distance);
+        agentForm.position.y = reduceMotion ? 0 : Math.sin(elapsed * 8) * 0.025;
+      } else {
+        echora.position.copy(agentDestinationRef.current);
+        agentForm.position.y += ((reduceMotion ? 0 : Math.sin(elapsed * 2.2) * 0.018) - agentForm.position.y) * 0.08;
+        if (placementRef.current > 0) {
+          placementRef.current = Math.max(0, placementRef.current - (reduceMotion ? 1 : 0.025));
+          cargo.scale.setScalar(placementRef.current);
+          if (placementRef.current === 0) cargo.visible = false;
+        }
+      }
 
       for (const room of rooms) {
         const object = roomObjectsRef.current.get(room.id)?.wire;
@@ -301,13 +368,14 @@ export default function EchoraWorld() {
         label.style.pointerEvents = visible ? "auto" : "none";
       }
 
-      const centerLabel = centerLabelRef.current;
-      if (centerLabel) {
-        missingRoom.getWorldPosition(worldPosition);
+      const agentLabel = agentLabelRef.current;
+      if (agentLabel) {
+        echora.getWorldPosition(worldPosition);
         projected.copy(worldPosition).project(camera);
         const x = (projected.x * 0.5 + 0.5) * mountElement.clientWidth;
         const y = (-projected.y * 0.5 + 0.5) * mountElement.clientHeight;
-        centerLabel.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
+        agentLabel.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -145%)`;
+        agentLabel.style.opacity = projected.z < 1 ? "1" : "0";
       }
 
       renderer.render(scene, camera);
@@ -327,8 +395,6 @@ export default function EchoraWorld() {
       renderer.domElement.removeEventListener("pointercancel", pointerUp);
       renderer.domElement.removeEventListener("wheel", wheel);
       renderer.dispose();
-      missingGeometry.dispose();
-      missingMaterial.dispose();
       featureMaterial.dispose();
       structure.traverse((object) => {
         const drawable = object as THREE.Object3D & { geometry?: THREE.BufferGeometry; material?: THREE.Material | THREE.Material[] };
@@ -339,12 +405,14 @@ export default function EchoraWorld() {
       roomObjects.clear();
       featureObjects.clear();
       edgeObjects.clear();
+      agentRef.current = null;
+      agentCargoRef.current = null;
       mountElement.removeChild(renderer.domElement);
     };
   }, []);
 
   return (
-    <section className="survey" aria-label="Interactive Echora structure">
+    <section className="survey" aria-label="Interactive Echora spatial memory">
       <div className="world-frame" id="threshold">
         <div className="world-canvas" ref={mountRef} aria-hidden="true" />
         <div className="room-labels" aria-label="Rooms">
@@ -364,13 +432,13 @@ export default function EchoraWorld() {
             </button>
           ))}
         </div>
-        <p className="center-note" ref={centerLabelRef} aria-hidden="true">unbuilt</p>
+        <p className="echora-label" ref={agentLabelRef} aria-hidden="true">echora</p>
         <p className="world-instruction">drag / select</p>
       </div>
 
       <aside className="room-reading" aria-live="polite">
         <div className="reading-index">
-          <span>current room</span>
+          <span>echora is in</span>
           <b>{activeRoom.label}</b>
         </div>
         <blockquote>{activeRoom.observation}</blockquote>
@@ -387,7 +455,7 @@ export default function EchoraWorld() {
           )}
         </div>
         <div className="path-record">
-          <span>rooms visited</span>
+          <span>echora&apos;s path</span>
           <ol>
             {visited.map((id, index) => (
               <li key={`${id}-${index}`}>{rooms.find((room) => room.id === id)?.label}</li>
