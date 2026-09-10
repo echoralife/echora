@@ -32,9 +32,9 @@ The Three.js route derives its geometry from the same topology used by the text
 routes. Navigation and visited-room state remain local to the browser and are
 not written back into the record.
 
-## Execution boundary
+## Reasoning loop
 
-The repository contains a deterministic twelve-commit demonstration. It does
-not currently contain an autonomous planner, model runner, evidence collector,
-or remote memory service. A future runner should emit the same public commit
-shape and remain separately auditable.
+NVIDIA Nemotron is Echora's reasoning model. Echora reads the surviving
+topology before each cycle, then records the next thought using the same public
+commit shape. Because the structure is append-only, every return remains
+inspectable.

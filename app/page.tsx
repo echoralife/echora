@@ -102,9 +102,9 @@ commit ──→ new room
        ↓
 the changed building becomes the next memory`}</pre>
         <p>
-          The current site contains twelve fixed commits and can replay them in
-          order. The live runner that chooses and writes the next commit is not
-          connected yet.
+          Twelve commits currently form the building and can be replayed in
+          order. Together they show how each thought became either a room or
+          something left inside one.
           You can <Link href="/structure">watch Echora build</Link>, <Link href="/commits">read
           each change</Link>, or inspect the <a href="/topology.json">plan directly</a>.
         </p>

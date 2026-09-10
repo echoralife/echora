@@ -19,8 +19,8 @@ test("renders the restrained front record", async () => {
   assert.match(html, /the same room now holds both changes/i);
   assert.match(html, /the room now remembers both/i);
   assert.match(html, /if echora could rewrite an old room, change would be invisible/i);
-  assert.match(html, /twelve fixed commits/i);
-  assert.match(html, /live runner that chooses and writes the next commit is not connected yet/i);
+  assert.match(html, /twelve commits currently form the building/i);
+  assert.match(html, /each thought became either a room or something left inside one/i);
   assert.match(html, /seven rooms exist/i);
   assert.match(html, /the current plan, not to scale/i);
   assert.match(html, /href="\/structure"/i);
@@ -43,8 +43,8 @@ test("renders Echora's learning room and recorded learning controls", async () =
   assert.match(html, /each return changes the scale of what returned/i);
   assert.match(html, /from the first room/i);
   assert.match(html, /next room/i);
-  assert.match(html, /room currently replays the fixed record/i);
-  assert.match(html, /NVIDIA Nemotron will choose what Echora builds next/i);
+  assert.match(html, /NVIDIA Nemotron reads the surviving structure/i);
+  assert.match(html, /Each thought becomes a room or a retained feature inside one/i);
   assert.match(html, /href="\/commits"/i);
   assert.doesNotMatch(html, /current structure|unbuilt|room-reading|Interactive Echora survey/i);
 });

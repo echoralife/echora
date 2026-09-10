@@ -4,7 +4,7 @@ import EchoraLearningRoom from "../EchoraLearningRoom";
 
 export const metadata: Metadata = {
   title: "echora. / learning room",
-  description: "Watch the recorded world being prepared for Echora's NVIDIA Nemotron runner.",
+  description: "Watch Echora turn NVIDIA Nemotron thoughts into rooms and permanent revisions.",
 };
 
 export default function Structure() {
@@ -25,7 +25,7 @@ export default function Structure() {
       <EchoraLearningRoom />
 
       <footer className="learning-page-footer">
-        <span>The room currently replays the fixed record. NVIDIA Nemotron will choose what Echora builds next.</span>
+        <span>NVIDIA Nemotron reads the surviving structure. Each thought becomes a room or a retained feature inside one.</span>
         <Link href="/commits">read every change</Link>
       </footer>
     </main>

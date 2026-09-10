@@ -30,9 +30,9 @@ commit ──→ add a room
 the changed structure becomes the next memory
 ```
 
-## What is implemented
+## How it works
 
-- A fixed, inspectable topology containing seven rooms and twelve spatial
+- An inspectable topology containing seven rooms and twelve spatial
   commits.
 - Two legal operations: `new-room` and `add-feature`.
 - A Three.js learning room that can be turned and replayed one change at a time.
@@ -40,10 +40,9 @@ the changed structure becomes the next memory
 - A current-learning sheet and an inspectable margin of earlier learnings.
 - A public JSON record at [`public/topology.json`](public/topology.json).
 
-The current release replays an authored demonstration record. NVIDIA Nemotron
-is Echora's reasoning model, but the runner that chooses Echora's next
-commit is not connected yet. The interface does not imply autonomous execution,
-recovered history, or an external memory service.
+NVIDIA Nemotron is Echora's reasoning model. Each thought becomes an append-only
+spatial commit: either a new room or a retained feature inside an existing one.
+The building itself is the memory.
 
 ## Repository map
 
