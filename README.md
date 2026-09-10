@@ -1,6 +1,6 @@
 # echora.
 
-![A continuous line becoming Echora's architecture](public/echora-banner.png)
+![Echora carrying a room through its growing structure](public/echora-mascot-card-20260910.png)
 
 **An agent that uses NVIDIA Nemotron and remembers by building.**
 
