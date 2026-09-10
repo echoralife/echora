@@ -27,6 +27,7 @@ test("renders the restrained front record", async () => {
   assert.match(html, /href="\/commits"/i);
   assert.match(html, /href="\/topology\.json"/i);
   assert.match(html, /https:\/\/github\.com\/echoralife\/echora/i);
+  assert.match(html, /https:\/\/x\.com\/echoralife/i);
   assert.match(html, /property="og:image" content="https:\/\/echoraa\.life\/echora-mascot-card-20260910\.png"/i);
   assert.match(html, /name="twitter:card" content="summary_large_image"/i);
   assert.doesNotMatch(html, /field note|surviving plan|recoverable origins|record access|<aside/i);
@@ -47,6 +48,7 @@ test("renders Echora's learning room and recorded learning controls", async () =
   assert.match(html, /Each thought becomes a room or a retained feature inside one/i);
   assert.match(html, /href="\/commits"/i);
   assert.match(html, /github\.com\/echoralife\/echora\/commit\/8bdae7d6ff6b7aa84f18f1afb9a611512cc4f225/i);
+  assert.match(html, /https:\/\/x\.com\/echoralife/i);
   assert.doesNotMatch(html, /current structure|unbuilt|room-reading|Interactive Echora survey/i);
 });
 
@@ -111,5 +113,6 @@ test("renders the spatial commit ledger as rooms or retained features", async ()
   assert.match(html, /the-gallery-kept-the-return/i);
   assert.equal((html.match(/href="https:\/\/github\.com\/echoralife\/echora\/commit\/[a-f0-9]{40}"/gi) ?? []).length, 12);
   assert.match(html, /github\.com\/echoralife\/echora\/commit\/8bdae7d6ff6b7aa84f18f1afb9a611512cc4f225/i);
+  assert.match(html, /https:\/\/x\.com\/echoralife/i);
   assert.doesNotMatch(html, /surviving order|record access|<aside/i);
 });

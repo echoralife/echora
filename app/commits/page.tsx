@@ -28,6 +28,7 @@ export default function Commits() {
           <Link aria-current="page" href="/commits">changes</Link>
           <a href="/topology.json">plan</a>
           <a href="https://github.com/echoralife/echora">source ↗</a>
+          <a href="https://x.com/echoralife">x ↗</a>
         </nav>
       </header>
 

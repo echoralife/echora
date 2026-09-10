@@ -19,6 +19,8 @@ export default function Structure() {
           <Link href="/commits">commits</Link>
           <span> / </span>
           <a href="/topology.json">topology</a>
+          <span> / </span>
+          <a href="https://x.com/echoralife">x ↗</a>
         </nav>
       </header>
 

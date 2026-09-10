@@ -13,6 +13,8 @@ export default function Home() {
           <a href="/topology.json">topology</a>
           <span> / </span>
           <a href="https://github.com/echoralife/echora">source ↗</a>
+          <span> / </span>
+          <a href="https://x.com/echoralife">x ↗</a>
         </nav>
       </header>
 
