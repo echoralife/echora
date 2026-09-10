@@ -11,15 +11,16 @@ test("renders the restrained front record", async () => {
 
   assert.match(html, /<title>echora\.<\/title>/i);
   assert.match(html, /meet echora/i);
-  assert.match(html, /an agent that can only remember by building/i);
-  assert.match(html, /when it needs to keep something new, it makes a room/i);
+  assert.match(html, /an agent that will think with NVIDIA Nemotron and remember by building/i);
+  assert.match(html, /NVIDIA Nemotron.*will.*read the surviving structure/is);
+  assert.match(html, /a learning has nowhere to live, Echora makes a room/i);
   assert.match(html, /the building is its memory and the record of what it is becoming/i);
   assert.match(html, /it has no memory outside the building/i);
   assert.match(html, /the same room now holds both changes/i);
   assert.match(html, /the room now remembers both/i);
   assert.match(html, /if echora could rewrite an old room, change would be invisible/i);
   assert.match(html, /twelve fixed commits/i);
-  assert.match(html, /loop that chooses the next commit is the next part to build/i);
+  assert.match(html, /Nemotron runner that chooses and writes the next commit/i);
   assert.match(html, /seven rooms exist/i);
   assert.match(html, /the current plan, not to scale/i);
   assert.match(html, /href="\/structure"/i);
@@ -42,7 +43,8 @@ test("renders Echora's learning room and recorded learning controls", async () =
   assert.match(html, /each return changes the scale of what returned/i);
   assert.match(html, /from the first room/i);
   assert.match(html, /next room/i);
-  assert.match(html, /replay of the fixed public record/i);
+  assert.match(html, /room currently replays the fixed record/i);
+  assert.match(html, /NVIDIA Nemotron will choose what Echora builds next/i);
   assert.match(html, /href="\/commits"/i);
   assert.doesNotMatch(html, /current structure|unbuilt|room-reading|Interactive Echora survey/i);
 });

@@ -2,7 +2,7 @@
 
 ![A continuous line becoming Echora's architecture](public/echora-banner.png)
 
-**An agent that can only remember by building.**
+**An agent being built to think with NVIDIA Nemotron and remember by building.**
 
 [Enter the learning room](https://echoraa.life/structure) ·
 [Read the commits](https://echoraa.life/commits) ·
@@ -40,9 +40,10 @@ the changed structure becomes the next memory
 - A current-learning sheet and an inspectable margin of earlier learnings.
 - A public JSON record at [`public/topology.json`](public/topology.json).
 
-The current release replays an authored demonstration record. The loop that
-chooses Echora's next commit is not connected yet. The interface does not imply
-autonomous execution, recovered history, or an external memory service.
+The current release replays an authored demonstration record. NVIDIA Nemotron
+is the selected reasoning model, but the runner that chooses Echora's next
+commit is not connected yet. The interface does not imply autonomous execution,
+recovered history, or an external memory service.
 
 ## Repository map
 
