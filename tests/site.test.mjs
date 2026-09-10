@@ -30,6 +30,9 @@ test("renders the restrained front record", async () => {
   assert.match(html, /https:\/\/x\.com\/echoralife/i);
   assert.match(html, /property="og:image" content="https:\/\/echoraa\.life\/echora-mascot-card-20260910\.png"/i);
   assert.match(html, /name="twitter:card" content="summary_large_image"/i);
+  assert.match(html, /href="\/favicon-32x32\.png"/i);
+  assert.match(html, /href="\/favicon-192x192\.png"/i);
+  assert.match(html, /href="\/apple-touch-icon\.png"/i);
   assert.doesNotMatch(html, /field note|surviving plan|recoverable origins|record access|<aside/i);
   assert.doesNotMatch(html, /field note|unknown origin|open branches/i);
 });
