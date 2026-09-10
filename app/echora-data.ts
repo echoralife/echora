@@ -20,7 +20,11 @@ export type SpatialCommit = {
 type Topology = {
   name: string;
   statement: string;
-  center: null;
+  agent: {
+    id: string;
+    memory: string;
+    movement: string;
+  };
   rule: string;
   rooms: Room[];
   edges: Array<[string, string]>;

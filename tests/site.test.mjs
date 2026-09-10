@@ -66,11 +66,17 @@ test("uses Three.js as the spatial mechanism and keeps the route local", async (
   assert.doesNotMatch(source, /Math\.random|localStorage|wallet|token/i);
 });
 
-test("publishes a fixed append-only topology with an explicitly absent center", async () => {
+test("publishes a fixed append-only topology for the Echora agent", async () => {
   const topology = JSON.parse(await readFile(new URL("../public/topology.json", import.meta.url), "utf8"));
 
   assert.equal(topology.name, "echora");
-  assert.equal(topology.center, null);
+  assert.equal(topology.statement, "echora remembers by building");
+  assert.deepEqual(topology.agent, {
+    id: "echora",
+    memory: "the structure",
+    movement: "follows the current commit",
+  });
+  assert.equal("center" in topology, false);
   assert.equal(topology.rooms.length, 7);
   assert.equal(topology.commits.length, 12);
   assert.deepEqual(new Set(topology.commits.map((commit) => commit.operation)), new Set(["new-room", "add-feature"]));

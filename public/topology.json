@@ -1,7 +1,11 @@
 {
   "name": "echora",
-  "statement": "the building remembers by growing",
-  "center": null,
+  "statement": "echora remembers by building",
+  "agent": {
+    "id": "echora",
+    "memory": "the structure",
+    "movement": "follows the current commit"
+  },
   "rule": "a spatial commit may attach one room or add one permanent feature; it may remove nothing",
   "rooms": [
     {
