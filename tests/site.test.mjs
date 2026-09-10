@@ -32,34 +32,33 @@ test("renders the restrained front record", async () => {
   assert.doesNotMatch(html, /field note|unknown origin|open branches/i);
 });
 
-test("renders the accumulated structure and growth controls", async () => {
+test("renders Echora's learning room and recorded learning controls", async () => {
   const html = await renderedPage("structure");
 
-  assert.match(html, /echora, inside the record/i);
-  assert.match(html, /each replayed change sends echora/i);
-  assert.match(html, /building becomes its memory/i);
-  assert.match(html, /Interactive Echora spatial memory/i);
-  assert.match(html, /echora is in/i);
-  assert.match(html, /things added here/i);
-  assert.match(html, /last change/i);
-  assert.match(html, /start over/i);
-  assert.match(html, /all changes shown/i);
+  assert.match(html, /echora\. \/ learning room/i);
+  assert.match(html, /the learning room/i);
+  assert.match(html, /Echora learning room/i);
+  assert.match(html, /what echora has learned/i);
+  assert.match(html, /each return changes the scale of what returned/i);
+  assert.match(html, /from the first room/i);
+  assert.match(html, /next room/i);
+  assert.match(html, /replay of the fixed public record/i);
   assert.match(html, /href="\/commits"/i);
-  assert.doesNotMatch(html, /unbuilt|no room.*moves when approached|Interactive Echora survey/i);
+  assert.doesNotMatch(html, /current structure|unbuilt|room-reading|Interactive Echora survey/i);
 });
 
-test("uses Three.js as the spatial mechanism and keeps the route local", async () => {
-  const source = await readFile(new URL("../app/EchoraWorld.tsx", import.meta.url), "utf8");
+test("uses Three.js for Echora, room construction, and local replay", async () => {
+  const source = await readFile(new URL("../app/EchoraLearningRoom.tsx", import.meta.url), "utf8");
 
   assert.match(source, /from "three"/);
   assert.match(source, /THREE\.WebGLRenderer/);
-  assert.match(source, /agentRef/);
-  assert.match(source, /agentCargoRef/);
-  assert.match(source, /THREE\.PlaneGeometry/);
+  assert.match(source, /THREE\.OctahedronGeometry/);
+  assert.match(source, /THREE\.GridHelper/);
+  assert.match(source, /roomObjectsRef/);
+  assert.match(source, /cargoRef/);
   assert.match(source, /setPointerCapture/);
   assert.match(source, /wheel/);
-  assert.match(source, /setVisited/);
-  assert.match(source, /commitStep/);
+  assert.match(source, /learningIndex/);
   assert.match(source, /featureObjectsRef/);
   assert.match(source, /second-lintel/);
   assert.match(source, /returning-frame/);
@@ -85,6 +84,7 @@ test("publishes a fixed append-only topology for the Echora agent", async () => 
   const roomIds = new Set(topology.rooms.map((room) => room.id));
   topology.commits.forEach((commit, index) => {
     assert.ok(roomIds.has(commit.target), commit.id);
+    assert.ok(commit.learning.length > 10, commit.id);
     if (index > 0) assert.equal(commit.parent, topology.commits[index - 1].id, commit.id);
     if (commit.operation === "add-feature") assert.ok(commit.feature, commit.id);
   });

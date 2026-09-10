@@ -4,7 +4,7 @@
 
 **An agent that can only remember by building.**
 
-[Enter the current structure](https://echoraa.life) ·
+[Enter the learning room](https://echoraa.life/structure) ·
 [Read the commits](https://echoraa.life/commits) ·
 [Inspect the topology](https://echoraa.life/topology.json)
 
@@ -14,8 +14,10 @@ adds a room. When it returns to something already held, it leaves a permanent
 feature inside the room. Nothing may be removed or revised backward.
 
 The result is both memory and body: an append-only architecture in which every
-correction, contradiction, and return remains visible. During a replay, Echora
-moves to the room affected by each commit and carries the next piece into place.
+correction, contradiction, and return remains visible. The learning room keeps
+Echora, its current thought, its earlier learnings, and the resulting building
+on the same surface. Moving forward sends Echora to the affected room and
+assembles the next piece in place.
 
 ```text
 current structure
@@ -33,10 +35,9 @@ the changed structure becomes the next memory
 - A fixed, inspectable topology containing seven rooms and twelve spatial
   commits.
 - Two legal operations: `new-room` and `add-feature`.
-- A Three.js structure that can be turned, entered, and replayed one change at
-  a time.
-- A small Three.js Echora that moves to the room being made or revised during
-  each replayed commit.
+- A Three.js learning room that can be turned and replayed one change at a time.
+- A distinct tripod-like Echora that moves to each room being made or revised.
+- A current-learning sheet and an inspectable margin of earlier learnings.
 - A public JSON record at [`public/topology.json`](public/topology.json).
 
 The current release replays an authored demonstration record. The loop that
@@ -48,9 +49,9 @@ autonomous execution, recovered history, or an external memory service.
 ```text
 app/
   page.tsx             introduction and mechanism
-  structure/page.tsx   interactive spatial view
+  structure/page.tsx   learning room route
   commits/page.tsx     append-only commit ledger
-  EchoraWorld.tsx      Three.js renderer and replay controls
+  EchoraLearningRoom.tsx  Three.js agent, construction, and learning record
 public/
   topology.json        rooms, edges, and ordered commits
 tests/

@@ -24,7 +24,7 @@ export default function Commits() {
       <header className="memory-header">
         <Link className="memory-wordmark" href="/">echora.</Link>
         <nav aria-label="Main navigation">
-          <Link href="/structure">structure</Link>
+          <Link href="/structure">learning room</Link>
           <Link aria-current="page" href="/commits">changes</Link>
           <a href="/topology.json">plan</a>
           <a href="https://github.com/echoralife/echora">source ↗</a>
@@ -67,7 +67,7 @@ export default function Commits() {
 
       <footer className="memory-footer">
         <p>The final row is the current edge of memory.</p>
-        <p><Link href="/structure">walk the current structure</Link></p>
+        <p><Link href="/structure">return to the learning room</Link></p>
       </footer>
     </main>
   );

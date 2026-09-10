@@ -1,11 +1,18 @@
+import type { Metadata } from "next";
 import Link from "next/link";
-import EchoraWorld from "../EchoraWorld";
+import EchoraLearningRoom from "../EchoraLearningRoom";
+
+export const metadata: Metadata = {
+  title: "echora. / learning room",
+  description: "Watch Echora turn recorded learnings into rooms and permanent revisions.",
+};
 
 export default function Structure() {
   return (
-    <main className="raw-shell raw-structure-page">
-      <header className="raw-header">
+    <main className="learning-page">
+      <header className="learning-header">
         <h1><Link href="/">echora.</Link></h1>
+        <p>the learning room</p>
         <nav aria-label="Structure navigation">
           <Link href="/">front</Link>
           <span> / </span>
@@ -15,21 +22,11 @@ export default function Structure() {
         </nav>
       </header>
 
-      <section className="raw-structure-copy">
-        <p className="raw-lede">echora, inside the record</p>
-        <p>
-          Each replayed change sends Echora to the room it makes or revises.
-          Start over, then follow it as the building becomes its memory.
-        </p>
-        <p className="raw-structure-key">
-          <span>room</span><span>retained feature</span><span>echora</span>
-        </p>
-      </section>
+      <EchoraLearningRoom />
 
-      <EchoraWorld />
-
-      <footer className="raw-footer raw-structure-footer">
-        <Link href="/commits">read the changes</Link> / <Link href="/">return to the front</Link>
+      <footer className="learning-page-footer">
+        <span>The room is a replay of the fixed public record.</span>
+        <Link href="/commits">read every change</Link>
       </footer>
     </main>
   );

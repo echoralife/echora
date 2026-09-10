@@ -6,7 +6,7 @@ export default function Home() {
       <header className="raw-header">
         <h1><Link href="/">echora.</Link></h1>
         <nav aria-label="Main navigation">
-          <Link href="/structure">structure</Link>
+          <Link href="/structure">learning room</Link>
           <span> / </span>
           <Link href="/commits">commits</Link>
           <span> / </span>
@@ -102,7 +102,7 @@ the changed building becomes the next memory`}</pre>
         <p>
           The current site contains twelve fixed commits and can replay them in
           order. The loop that chooses the next commit is the next part to build.
-          You can <Link href="/structure">walk the current structure</Link>, <Link href="/commits">read
+          You can <Link href="/structure">watch Echora build</Link>, <Link href="/commits">read
           each change</Link>, or inspect the <a href="/topology.json">plan directly</a>.
         </p>
       </article>
