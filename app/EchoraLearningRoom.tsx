@@ -130,8 +130,17 @@ export default function EchoraLearningRoom() {
       floor.castShadow = true;
       roomGroup.add(floor, makeEdges(floorGeometry));
 
+      const backWallParts = room.id === "window-room"
+        ? [
+            { size: [2.05, 0.18, 0.07], position: [0, 0.85, -0.705] },
+            { size: [2.05, 0.28, 0.07], position: [0, 0.18, -0.705] },
+            { size: [0.64, 0.44, 0.07], position: [-0.705, 0.54, -0.705] },
+            { size: [0.64, 0.44, 0.07], position: [0.705, 0.54, -0.705] },
+          ]
+        : [{ size: [2.05, 0.9, 0.07], position: [0, 0.49, -0.705] }];
+
       const wallParts = [
-        { size: [2.05, 0.9, 0.07], position: [0, 0.49, -0.705] },
+        ...backWallParts,
         { size: [0.07, 0.9, 1.48], position: [-0.99, 0.49, 0] },
         { size: [0.07, 0.9, 0.5], position: [0.99, 0.49, -0.49] },
         { size: [0.07, 0.9, 0.38], position: [0.99, 0.49, 0.55] },
@@ -146,6 +155,13 @@ export default function EchoraLearningRoom() {
         const outline = makeEdges(geometry);
         outline.position.copy(wall.position);
         roomGroup.add(wall, outline);
+      }
+
+      if (room.id === "window-room") {
+        const windowGeometry = new THREE.BoxGeometry(0.78, 0.46, 0.08);
+        const windowFrame = makeEdges(windowGeometry, blue);
+        windowFrame.position.set(0, 0.54, -0.71);
+        roomGroup.add(windowFrame);
       }
 
       world.add(roomGroup);

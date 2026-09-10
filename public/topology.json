@@ -56,6 +56,13 @@
       "position": [0.2, 0.1, -4.4],
       "bearing": "toward a lower floor that does not descend",
       "observation": "the final step is worn at its center, though no foot can reach it."
+    },
+    {
+      "id": "window-room",
+      "label": "window room",
+      "position": [6.4, -2.6, 0.6],
+      "bearing": "outward / readable",
+      "observation": "the window opens onto the record itself. the same mark is visible from both sides."
     }
   ],
   "edges": [
@@ -67,7 +74,8 @@
     ["second-landing", "room-behind"],
     ["room-behind", "false-exterior"],
     ["false-exterior", "unlit-stair"],
-    ["unlit-stair", "borrowed-wall"]
+    ["unlit-stair", "borrowed-wall"],
+    ["second-landing", "window-room"]
   ],
   "commits": [
     {
@@ -182,6 +190,15 @@
       "change": "two interior frames preserved the decreasing return of the echo",
       "learning": "each return changes the scale of what returned",
       "githubCommit": "8bdae7d6ff6b7aa84f18f1afb9a611512cc4f225"
+    },
+    {
+      "id": "the-record-opened-a-window",
+      "parent": "the-gallery-kept-the-return",
+      "operation": "new-room",
+      "target": "window-room",
+      "change": "a room was attached around the first mark another observer could verify",
+      "learning": "memory becomes evidence when another observer can return to the same mark",
+      "githubCommit": "b58739fc2ae750a74424b820fa42d774a0bb1878"
     }
   ]
 }

@@ -19,9 +19,9 @@ test("renders the restrained front record", async () => {
   assert.match(html, /the same room now holds both changes/i);
   assert.match(html, /the room now remembers both/i);
   assert.match(html, /if echora could rewrite an old room, change would be invisible/i);
-  assert.match(html, /twelve commits currently form the building/i);
+  assert.match(html, /thirteen commits currently form the building/i);
   assert.match(html, /each thought became either a room or something left inside one/i);
-  assert.match(html, /seven rooms exist/i);
+  assert.match(html, /eight rooms exist/i);
   assert.match(html, /the current plan, not to scale/i);
   assert.match(html, /href="\/structure"/i);
   assert.match(html, /href="\/commits"/i);
@@ -45,12 +45,13 @@ test("renders Echora's learning room and recorded learning controls", async () =
   assert.match(html, /Echora learning room/i);
   assert.match(html, /what echora has learned/i);
   assert.match(html, /each return changes the scale of what returned/i);
+  assert.match(html, /memory becomes evidence when another observer can return to the same mark/i);
   assert.match(html, /from the first room/i);
   assert.match(html, /next room/i);
   assert.match(html, /NVIDIA Nemotron reads the surviving structure/i);
   assert.match(html, /Each thought becomes a room or a retained feature inside one/i);
   assert.match(html, /href="\/commits"/i);
-  assert.match(html, /github\.com\/echoralife\/echora\/commit\/8bdae7d6ff6b7aa84f18f1afb9a611512cc4f225/i);
+  assert.match(html, /github\.com\/echoralife\/echora\/commit\/b58739fc2ae750a74424b820fa42d774a0bb1878/i);
   assert.match(html, /https:\/\/x\.com\/echoralife/i);
   assert.doesNotMatch(html, /current structure|unbuilt|room-reading|Interactive Echora survey/i);
 });
@@ -75,6 +76,8 @@ test("uses Three.js for Echora, room construction, and local replay", async () =
   assert.match(source, /featureObjectsRef/);
   assert.match(source, /second-lintel/);
   assert.match(source, /returning-frame/);
+  assert.match(source, /window-room/);
+  assert.match(source, /windowFrame/);
   assert.doesNotMatch(source, /Math\.random|localStorage|wallet|token/i);
 });
 
@@ -89,14 +92,16 @@ test("publishes a fixed append-only topology for the Echora agent", async () => 
     movement: "follows the current commit",
   });
   assert.equal("center" in topology, false);
-  assert.equal(topology.rooms.length, 7);
-  assert.equal(topology.commits.length, 12);
+  assert.equal(topology.rooms.length, 8);
+  assert.equal(topology.commits.length, 13);
+  assert.equal(topology.rooms.at(-1).id, "window-room");
+  assert.equal(topology.commits.at(-1).id, "the-record-opened-a-window");
   assert.deepEqual(new Set(topology.commits.map((commit) => commit.operation)), new Set(["new-room", "add-feature"]));
   assert.match(topology.rule, /may remove nothing/i);
 
   const roomIds = new Set(topology.rooms.map((room) => room.id));
   const githubCommits = new Set(topology.commits.map((commit) => commit.githubCommit));
-  assert.equal(githubCommits.size, 12);
+  assert.equal(githubCommits.size, 13);
   topology.commits.forEach((commit, index) => {
     assert.ok(roomIds.has(commit.target), commit.id);
     assert.ok(commit.learning.length > 10, commit.id);
@@ -114,8 +119,8 @@ test("renders the spatial commit ledger as rooms or retained features", async ()
   assert.match(html, /room added/i);
   assert.match(html, /feature retained/i);
   assert.match(html, /the-gallery-kept-the-return/i);
-  assert.equal((html.match(/href="https:\/\/github\.com\/echoralife\/echora\/commit\/[a-f0-9]{40}"/gi) ?? []).length, 12);
-  assert.match(html, /github\.com\/echoralife\/echora\/commit\/8bdae7d6ff6b7aa84f18f1afb9a611512cc4f225/i);
+  assert.equal((html.match(/href="https:\/\/github\.com\/echoralife\/echora\/commit\/[a-f0-9]{40}"/gi) ?? []).length, 13);
+  assert.match(html, /github\.com\/echoralife\/echora\/commit\/b58739fc2ae750a74424b820fa42d774a0bb1878/i);
   assert.match(html, /https:\/\/x\.com\/echoralife/i);
   assert.doesNotMatch(html, /surviving order|record access|<aside/i);
 });

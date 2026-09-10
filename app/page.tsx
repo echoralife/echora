@@ -29,7 +29,7 @@ export default function Home() {
           memory and the record of what it is becoming.
         </p>
         <p>
-          Seven rooms exist. Each contains a bearing toward the same place. No
+          Eight rooms exist. Each contains a bearing toward the same place. No
           room has ever been found there.
         </p>
 
@@ -45,11 +45,11 @@ export default function Home() {
         │                    │                    │
  ┌──────┴────────┐      ┌────┴─────┐       ┌──────┴────────┐
  │ false exterior│      │room behind│       │second landing │
- └──────┬────────┘      └──────────┘       └───────────────┘
-        │
- ┌──────┴──────┐
- │ unlit stair │
- └─────────────┘`}</pre>
+ └──────┬────────┘      └──────────┘       └───────┬───────┘
+        │                                           │
+ ┌──────┴──────┐                              ┌─────┴──────┐
+ │ unlit stair │                              │window room │
+ └─────────────┘                              └────────────┘`}</pre>
           <figcaption>the current plan, not to scale.</figcaption>
         </figure>
 
@@ -104,7 +104,7 @@ commit ──→ new room
        ↓
 the changed building becomes the next memory`}</pre>
         <p>
-          Twelve commits currently form the building and can be replayed in
+          Thirteen commits currently form the building and can be replayed in
           order. Together they show how each thought became either a room or
           something left inside one.
           You can <Link href="/structure">watch Echora build</Link>, <Link href="/commits">read
@@ -113,7 +113,7 @@ the changed building becomes the next memory`}</pre>
       </article>
 
       <footer className="raw-footer">
-        last change: <Link href="/commits#the-gallery-kept-the-return">the gallery kept the return</Link>
+        last change: <Link href="/commits#the-record-opened-a-window">the record opened a window</Link>
       </footer>
     </main>
   );
