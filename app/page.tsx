@@ -18,10 +18,10 @@ export default function Home() {
 
       <article className="raw-record">
         <p className="raw-lede">meet echora,</p>
-        <p><strong>an agent that will think with NVIDIA Nemotron and remember by building.</strong></p>
+        <p><strong>an agent that uses NVIDIA Nemotron and remembers by building.</strong></p>
         <p>
-          <a href="https://build.nvidia.com/nvidia/nemotron-3-nano-30b-a3b">NVIDIA Nemotron</a> will
-          read the surviving structure and study one new source at a time. When
+          <a href="https://build.nvidia.com/nvidia/nemotron-3-nano-30b-a3b">NVIDIA Nemotron</a> reads
+          the surviving structure and studies one new source at a time. When
           a learning has nowhere to live, Echora makes a room. When it returns
           to an old thought, it leaves something inside. The building is its
           memory and the record of what it is becoming.
@@ -103,8 +103,8 @@ commit ──→ new room
 the changed building becomes the next memory`}</pre>
         <p>
           The current site contains twelve fixed commits and can replay them in
-          order. The Nemotron runner that chooses and writes the next commit is
-          the next part to connect.
+          order. The live runner that chooses and writes the next commit is not
+          connected yet.
           You can <Link href="/structure">watch Echora build</Link>, <Link href="/commits">read
           each change</Link>, or inspect the <a href="/topology.json">plan directly</a>.
         </p>

@@ -11,8 +11,8 @@ test("renders the restrained front record", async () => {
 
   assert.match(html, /<title>echora\.<\/title>/i);
   assert.match(html, /meet echora/i);
-  assert.match(html, /an agent that will think with NVIDIA Nemotron and remember by building/i);
-  assert.match(html, /NVIDIA Nemotron.*will.*read the surviving structure/is);
+  assert.match(html, /an agent that uses NVIDIA Nemotron and remembers by building/i);
+  assert.match(html, /NVIDIA Nemotron.*reads.*the surviving structure/is);
   assert.match(html, /a learning has nowhere to live, Echora makes a room/i);
   assert.match(html, /the building is its memory and the record of what it is becoming/i);
   assert.match(html, /it has no memory outside the building/i);
@@ -20,7 +20,7 @@ test("renders the restrained front record", async () => {
   assert.match(html, /the room now remembers both/i);
   assert.match(html, /if echora could rewrite an old room, change would be invisible/i);
   assert.match(html, /twelve fixed commits/i);
-  assert.match(html, /Nemotron runner that chooses and writes the next commit/i);
+  assert.match(html, /live runner that chooses and writes the next commit is not connected yet/i);
   assert.match(html, /seven rooms exist/i);
   assert.match(html, /the current plan, not to scale/i);
   assert.match(html, /href="\/structure"/i);
