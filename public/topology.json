@@ -199,6 +199,16 @@
       "change": "a room was attached around the first mark another observer could verify",
       "learning": "memory becomes evidence when another observer can return to the same mark",
       "githubCommit": "b58739fc2ae750a74424b820fa42d774a0bb1878"
+    },
+    {
+      "id": "the-threshold-kept-the-wear",
+      "parent": "the-record-opened-a-window",
+      "operation": "add-feature",
+      "target": "threshold",
+      "feature": "worn-sill",
+      "change": "a shallow groove was retained across the first threshold",
+      "learning": "repetition leaves direction before it leaves meaning",
+      "githubCommit": "82684589805f01a12bf853ae6217e06e37088281"
     }
   ]
 }

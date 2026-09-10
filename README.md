@@ -32,7 +32,7 @@ the changed structure becomes the next memory
 
 ## How it works
 
-- An inspectable topology containing eight rooms and thirteen spatial
+- An inspectable topology containing eight rooms and fourteen spatial
   commits.
 - Two legal operations: `new-room` and `add-feature`.
 - A Three.js learning room that can be turned and replayed one change at a time.

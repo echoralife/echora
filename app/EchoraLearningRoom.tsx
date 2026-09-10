@@ -220,6 +220,13 @@ export default function EchoraLearningRoom() {
         }
       }
 
+      if (commit.feature === "worn-sill") {
+        const geometry = new THREE.BoxGeometry(0.08, 0.025, 0.64);
+        const wornSill = new THREE.Mesh(geometry, featureMaterial.clone());
+        wornSill.position.set(0.97, 0.06, 0.12);
+        feature.add(wornSill);
+      }
+
       world.add(feature);
       featureObjectsRef.current.set(commit.id, feature);
     }

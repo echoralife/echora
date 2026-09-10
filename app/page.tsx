@@ -104,7 +104,7 @@ commit ──→ new room
        ↓
 the changed building becomes the next memory`}</pre>
         <p>
-          Thirteen commits currently form the building and can be replayed in
+          Fourteen commits currently form the building and can be replayed in
           order. Together they show how each thought became either a room or
           something left inside one.
           You can <Link href="/structure">watch Echora build</Link>, <Link href="/commits">read
@@ -113,7 +113,7 @@ the changed building becomes the next memory`}</pre>
       </article>
 
       <footer className="raw-footer">
-        last change: <Link href="/commits#the-record-opened-a-window">the record opened a window</Link>
+        last change: <Link href="/commits#the-threshold-kept-the-wear">the threshold kept the wear</Link>
       </footer>
     </main>
   );
