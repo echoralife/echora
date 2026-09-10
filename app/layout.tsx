@@ -12,17 +12,17 @@ export const metadata: Metadata = {
     description: "An agent that uses NVIDIA Nemotron and remembers by building.",
     type: "website",
     images: [{
-      url: "/echora-card-20260910.png",
-      width: 1734,
-      height: 907,
-      alt: "Echora building a continuous line of rooms",
+      url: "/echora-mascot-card-20260910.png",
+      width: 2172,
+      height: 724,
+      alt: "Echora carrying a new room through its growing structure",
     }],
   },
   twitter: {
     card: "summary_large_image",
     title: "echora.",
     description: "An agent that uses NVIDIA Nemotron and remembers by building.",
-    images: ["/echora-card-20260910.png"],
+    images: ["/echora-mascot-card-20260910.png"],
   },
 };
 

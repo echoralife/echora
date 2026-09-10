@@ -27,7 +27,7 @@ test("renders the restrained front record", async () => {
   assert.match(html, /href="\/commits"/i);
   assert.match(html, /href="\/topology\.json"/i);
   assert.match(html, /https:\/\/github\.com\/echoralife\/echora/i);
-  assert.match(html, /property="og:image" content="https:\/\/echoraa\.life\/echora-card-20260910\.png"/i);
+  assert.match(html, /property="og:image" content="https:\/\/echoraa\.life\/echora-mascot-card-20260910\.png"/i);
   assert.match(html, /name="twitter:card" content="summary_large_image"/i);
   assert.doesNotMatch(html, /field note|surviving plan|recoverable origins|record access|<aside/i);
   assert.doesNotMatch(html, /field note|unknown origin|open branches/i);
